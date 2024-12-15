@@ -75,21 +75,26 @@ def fetch_historical_exchange_data(quote, from_date, to_date):
         logging.error(f"Error parsing the table: {e}")
 
 
-def store_data_in_sqlite(dataframe, db_name, table_name):
+def store_data_in_memory(dataframe, table_name):
     """
-    Stores a Pandas DataFrame into an SQLite database.
+    Stores a Pandas DataFrame into an in-memory SQLite database.
 
     Parameters:
         dataframe (pd.DataFrame): The DataFrame to store.
-        db_name (str): The name of the SQLite database file.
         table_name (str): The name of the table to store the data.
     """
     try:
-        with sqlite3.connect(db_name) as conn:
+        # Create an in-memory SQLite database
+        with sqlite3.connect(":memory:") as conn:
+            # Store the DataFrame in the database
             dataframe.to_sql(table_name, conn, if_exists='replace', index=False)
-            logging.info(f"Data stored in SQLite database '{db_name}' table '{table_name}'.")
+            logging.info(f"Data stored in in-memory SQLite database table '{table_name}'.")
+            
+            # For demonstration purposes, query and display the data
+            result = pd.read_sql(f"SELECT * FROM {table_name}", conn)
+            logging.info(f"Queried data from in-memory database:\n{result}")
     except Exception as e:
-        logging.error(f"Error storing data in SQLite: {e}")
+        logging.error(f"Error storing data in in-memory SQLite database: {e}")
 
 
 if __name__ == "__main__":
@@ -110,10 +115,9 @@ if __name__ == "__main__":
             print("Extracted Historical Data:")
             print(historical_data)
 
-            # Store the data in SQLite
-            db_name = "historical_exchange_data.db"
+            # Store the data in an in-memory SQLite database
             table_name = "exchange_rates"
-            store_data_in_sqlite(historical_data, db_name, table_name)
+            store_data_in_memory(historical_data, table_name)
         else:
             logging.warning("No valid data was extracted.")
 
