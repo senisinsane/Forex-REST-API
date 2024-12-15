@@ -37,8 +37,7 @@ The script will fetch the historical forex data and store it in an in-memory SQL
 
 ## Task 2: Forex API (forex_api.py)
 ### Setup
-Subtask 1: Implementing the Flask API
-Change to the Task2_SubTask1/api/ directory.
+Subtask 1: Implementing the Flask API. Change to the Task2_SubTask1/api/ directory.
 
 Run the following command to start the Flask app:
 
@@ -48,8 +47,7 @@ python forex_api.py
 ```
 The server will start running, and you can access the API documentation via Postman to send requests.
 
-Subtask 2: Scheduling the Scraping Task
-Change to the Task2_SubTask2 directory.
+Subtask 2: Scheduling the Scraping Task. Change to the Task2_SubTask2 directory.
 
 Run the following command to start the scheduled scraping job:
 
