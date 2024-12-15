@@ -45,7 +45,7 @@ bash
 ```
 python forex_api.py
 ```
-The server will start running, and you can access the API documentation via Postman to send requests.
+The server will start running, and you can access the API documentation( https://documenter.getpostman.com/view/25131445/2sAYHzFMwk)  via Postman to send requests.
 
 Subtask 2: Scheduling the Scraping Task. Change to the Task2_SubTask2 directory.
 
